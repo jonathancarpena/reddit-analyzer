@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+// Next
+import Head from 'next/head'
+
 // Context
 import { useDarkMode } from '../../context/DarkMode'
 
@@ -548,6 +551,11 @@ function SubredditSearch({ overview, activity }) {
     useEffect(() => { setDomLoaded(true) }, [])
     return (
         <>
+            <Head>
+                <title>{`Overview for r/${overview.display_name} - Reddit Analyzer`}</title>
+                <meta name="description" content={`Overview for r/${overview.display_name} - Reddit Analyzer`} />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             {domLoaded
                 ? <main id="results" className='pt-5 md:py-8 md:px-16 lg:py-16 lg:px-32 mx-auto min-h-[70vh] max-w-[1700px]'>
                     <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}   py-10 px-5 md:py-14 md:px-10 lg:p-20   md:rounded-xl min-h-[67.5vh] md:min-h-[65vh]`}>
