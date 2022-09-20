@@ -18,7 +18,7 @@ function DarkModeToggle() {
     const darkMode = useDarkMode()
     const toggleDarkMode = useToggleDarkMode()
     return (
-        <button type="button" className='absolute top-5 right-5 z-[100] transition-colors ease-in-out duration-200'>
+        <button type="button" aria-labelledby='darkModeToggle' className='absolute top-5 right-5 z-[100] transition-colors ease-in-out duration-200'>
             {darkMode
                 ? <MdDarkMode onClick={toggleDarkMode} className='text-secondary-600 text-[2rem] xl:text-[3rem] cursor-pointer' />
                 : <MdOutlineDarkMode onClick={toggleDarkMode} className='text-secondary-600 text-[2rem] xl:text-[3rem] cursor-pointer' />
@@ -43,6 +43,7 @@ function SearchInput({ type, inputRef, handleFormSubmit }) {
                     id={`${type === "user" ? 'userSearch' : "subredditSearch"}`}
                     placeholder={`${type === "user" ? 'Search Username' : "Search Subreddit"}`}
                     value={search}
+                    type="text"
                     onChange={(e) => setSearch(e.target.value)}
                     className={`${darkMode ? 'bg-gray-800 text-secondary-100 hover:bg-gray-900 focus:bg-gray-900' : 'bg-[#F6F7F8] hover:bg-white text-black focus:bg-white'} py-2.5 pl-16  pr-[4rem] md:pr-[4.2rem]  hover:ring-[1px] hover:ring-analogous-500  focus:outline-[1px]  focus:ring-0   focus:outline-offset-1 focus:outline-analogous-500  rounded-sm transition-all ease-in-out duration-100 active:outline-analogous-500`}
                 />
@@ -102,7 +103,7 @@ function Form({ setIsLoading }) {
                 <div className='flex flex-col items-center lg:hidden'>
 
 
-                    <div className={`inline-block mx-auto mb-5 relative ${hiddenDelay ? 'overflow-visible' : ''}`}>
+                    <div className={`inline-block mx-auto my-3 relative ${hiddenDelay ? 'overflow-visible' : ''}`}>
                         <span onClick={handleShow} className={`${darkMode ? ' text-secondary-100' : ' text-black'} k z-10 capitalize cursor-pointer select-none md:text-lg`}>
                             {option} {showMenu ? <BsCaretUpFill className='inline-block' /> : <BsCaretDownFill className='inline-block' />}
                         </span>
@@ -114,14 +115,18 @@ function Form({ setIsLoading }) {
                 ${hiddenDelay ? 'inline-block' : ''}
                ${showMenu ? 'scale-100 opacity-100 z-10' : 'text-transparent scale-[.4] opacity-0 -translate-y-[25px] select-none z-0'}
                 absolute -translate-x-[50%] left-[50%] top-7 cursor-pointer
-                ${darkMode ? 'bg-black active:bg-gray-900 text-secondary-100' : 'bg-white active:bg-gray-100'}  active:scale-110 p-3  drop-shadow-md rounded-sm text-gray-800 
+                ${darkMode ? 'bg-black active:bg-gray-900 text-secondary-100' : 'bg-white active:bg-gray-100'}  active:scale-110 p-3  drop-shadow-md rounded-sm 
                 transition-all ease-in-out select-none
                 `}>
                             <span>{option === 'user' ? 'Subreddit' : 'User'}</span>
                         </div>
 
                     </div>
+                    {option === "user"
+                        ? <SearchInput type="user" inputRef={inputRef} handleFormSubmit={handleFormSubmit} />
 
+                        : <SearchInput type="subreddit" inputRef={inputRef} handleFormSubmit={handleFormSubmit} />
+                    }
 
 
                 </div>
