@@ -262,7 +262,7 @@ function SingleChart({ array, activity = false, karma = false, type, slots, colo
 
                 <div className='flex flex-col space-y-1 xl:space-y-0 xl:space-x-5 xl:flex-row items-center'>
                     <span className='text-lg'>Cumulative</span>
-                    <Toggle toggle={cumulative} setToggle={setCumaltive} />
+                    <Toggle data-testid={`${activity ? 'activity' : 'karma'}-${type}-toggle-btn`} toggle={cumulative} setToggle={setCumaltive} />
                 </div>
 
             </div>
@@ -273,6 +273,8 @@ function SingleChart({ array, activity = false, karma = false, type, slots, colo
                 <AreaChart
                     width={550}
                     height={400}
+                    data-testid={`${activity ? 'activity' : 'karma'}-${type}-chart`}
+                    className={`${cumulative ? 'cumulative' : 'static'}`}
                     data={cumulative ? cumulativeData() : staticData()}
                     margin={{
                         top: 5,
@@ -426,17 +428,17 @@ function SingleChart({ array, activity = false, karma = false, type, slots, colo
 }
 
 function Charts({ data, type, color1, color2 }) {
-    const screenWidth = useDeviceWidth()
-    const [slots, setSlots] = useState(15)
+    // const screenWidth = useDeviceWidth()
+    // const [slots, setSlots] = useState(15)
 
-    useEffect(() => {
-        if (screenWidth < 767 && slots !== 7) {
-            setSlots(7)
-        }
-        if (screenWidth >= 767 && slots !== 15) {
-            setSlots(15)
-        }
-    }, [screenWidth, slots])
+    // useEffect(() => {
+    //     if (screenWidth < 767 && slots !== 7) {
+    //         setSlots(7)
+    //     }
+    //     if (screenWidth >= 767 && slots !== 15) {
+    //         setSlots(15)
+    //     }
+    // }, [screenWidth, slots])
 
     return (
         <div className='py-10 pb-20  border-b-2 flex flex-col space-y-16 xl:space-y-0 xl:flex-row justify-around xl:pt-10 xl:px-10 xl:pb-15 '>
@@ -446,14 +448,14 @@ function Charts({ data, type, color1, color2 }) {
                         activity={true}
                         array={data}
                         type={type}
-                        slots={slots}
+                        slots={10}
                         color={color1}
                     />
                     <SingleChart
                         karma={true}
                         array={data}
                         type={type}
-                        slots={slots}
+                        slots={10}
                         color={color2}
                     />
                 </>

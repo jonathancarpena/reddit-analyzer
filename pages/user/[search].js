@@ -12,6 +12,7 @@ import moment from 'moment'
 import { fleschFormula, calcFrequency, unix, textAnalysis } from '../../lib/utils'
 
 // Components
+import Layout from '../../components/Layout'
 import Loading from '../../components/Layout'
 import Scores from '../../components/User/Scores'
 import TextAnalysis from '../../components/User/TextAnalysis'
@@ -63,7 +64,8 @@ export async function getServerSideProps(context) {
             const res = await axios(`https://www.reddit.com/user/${search}/about.json`)
             return res.data.data
         } catch (errors) {
-            error = true
+            return null
+
         }
     }
     async function fetchComments() {
@@ -230,7 +232,7 @@ export async function getServerSideProps(context) {
 function UserOverview({ overview, username, submissions, comments, recentActivity }) {
     const darkMode = useDarkMode()
     return (
-        <div className='tracking-tight pb-10 border-b-2 flex flex-col items-center justify-center space-y-5'>
+        <div data-testid="user-overview" className='tracking-tight pb-10 border-b-2 flex flex-col items-center justify-center space-y-5'>
             <h1 className={`${darkMode ? ' text-secondary-100' : ' text-black'} flex flex-col items-center text-3xl  lg:flex-row lg:space-x-2  lg:text-4xl`}>
                 <span>Overview for</span>
                 <a
@@ -267,9 +269,10 @@ function UserOverview({ overview, username, submissions, comments, recentActivit
 
 function UserAnalysis({ overview, comments, submissions, scores, bestAndWorst, frequency }) {
     const darkMode = useDarkMode()
+
     return (
 
-        <div className={`${darkMode ? 'text-secondary-100' : 'text-black'}  flex flex-col`}>
+        <div data-testid="user-analysis" className={`${darkMode ? 'text-secondary-100' : 'text-black'}  flex flex-col`}>
             <Scores
                 commentsKarma={overview.comment_karma}
                 submissionsKarma={overview.link_karma}
@@ -310,8 +313,9 @@ function UserSearch({ username, overview, error, scores, bestAndWorst, frequency
         setDomLoaded(true)
     }, [])
 
+
     return (
-        <>
+        <Layout>
             <Head>
                 <title>{`Overview for u/${username} - Reddit Analyzer`}</title>
                 <meta name="description" content={`Overview for u/${username} - Reddit Analyzer`} />
@@ -321,9 +325,9 @@ function UserSearch({ username, overview, error, scores, bestAndWorst, frequency
             {domLoaded
 
                 ? <>
-                    {overview.hasOwnProperty('name')
+                    {overview
                         ? <>
-                            <main id="results" className='pt-5 md:py-8 md:px-16 lg:py-16 lg:px-32 mx-auto min-h-[70vh] max-w-[1700px]'>
+                            <main data-testid="mainSection" id="results" className='pt-5 md:py-8 md:px-16 lg:py-16 lg:px-32 mx-auto min-h-[70vh] max-w-[1700px]'>
                                 <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}   py-10 px-5 md:py-14 md:px-10 lg:p-20   md:rounded-xl min-h-[67.5vh] md:min-h-[65vh]`}>
                                     <div className='flex flex-col  transition-all duration-150'>
                                         {/* Overview */}
@@ -362,8 +366,8 @@ function UserSearch({ username, overview, error, scores, bestAndWorst, frequency
                             </main>
 
                         </>
-                        : <main className='flex justify-center items-center min-h-[70vh] '>
-                            <span className='text-5xl text-sub'>DUST</span>
+                        : <main data-testid="mainSection" className='flex justify-center items-center min-h-[70vh] '>
+                            <h1 className='text-5xl text-sub'>DUST</h1>
                         </main>
                     }
                 </>
@@ -372,7 +376,7 @@ function UserSearch({ username, overview, error, scores, bestAndWorst, frequency
             }
 
 
-        </>
+        </Layout>
 
     )
 }

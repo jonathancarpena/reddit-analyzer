@@ -8,6 +8,7 @@ import ReactSlider from 'react-slider'
 
 let limit = 75
 function Slider({ list, type }) {
+
     const [slicedList, setSlicedList] = useState([list[0]])
     const darkMode = useDarkMode()
     if (list.length < 75) {
@@ -39,7 +40,9 @@ function Slider({ list, type }) {
                         min={1}
                         onChange={handleSliderChange}
                         renderThumb={(props, state) =>
-                            <div {...props}
+                            <div
+                                data-testid={`slider-thumb-${type}`}
+                                {...props}
                                 className={`
                                 bg-white border-2 p-3 relative select-none  -top-[7px] w-[25px] h-[25px] md:w-[30px] md:h-[30px] lg:w-[35px] lg:h-[35px] text-transparent rounded-full
                         cursor-pointer active:scale-125 transition-transform 
