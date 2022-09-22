@@ -64,6 +64,7 @@ export async function getServerSideProps(context) {
             const res = await axios(`https://www.reddit.com/user/${search}/about.json`)
             return res.data.data
         } catch (errors) {
+            console.log(errors)
             return null
 
         }
