@@ -12,6 +12,7 @@ import moment from 'moment'
 import { unix } from '../../lib/utils'
 
 // Components
+import Layout from '../../components/Layout'
 import Loading from '../../components/Layout'
 
 export async function getServerSideProps(context) {
@@ -556,25 +557,27 @@ function SubredditSearch({ overview, activity }) {
                 <meta name="description" content={`Overview for r/${overview.display_name} - Reddit Analyzer`} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {domLoaded
-                ? <main id="results" className='pt-5 md:py-8 md:px-16 lg:py-16 lg:px-32 mx-auto min-h-[70vh] max-w-[1700px]'>
-                    <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}   py-10 px-5 md:py-14 md:px-10 lg:p-20   md:rounded-xl min-h-[67.5vh] md:min-h-[65vh]`}>
-                        <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}`}>
-                            <SubredditOverview overview={overview} activity={activity} />
+            <Layout>
+                {domLoaded
+                    ? <main id="results" className='pt-5 md:py-8 md:px-16 lg:py-16 lg:px-32 mx-auto min-h-[70vh] max-w-[1700px]'>
+                        <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}   py-10 px-5 md:py-14 md:px-10 lg:p-20   md:rounded-xl min-h-[67.5vh] md:min-h-[65vh]`}>
+                            <div className={`${darkMode ? 'bg-black text-secondary-100' : 'bg-secondary-100 text-black'}`}>
+                                <SubredditOverview overview={overview} activity={activity} />
 
-                            {activity.length > 0
-                                ? <HeatMap activity={activity} />
+                                {activity.length > 0
+                                    ? <HeatMap activity={activity} />
 
-                                : <h1 className='h-[35vh]    text-sub text-2xl flex justify-center items-center'>
-                                    Dust.
-                                </h1>}
+                                    : <h1 className='h-[35vh]    text-sub text-2xl flex justify-center items-center'>
+                                        Dust.
+                                    </h1>}
 
 
+                            </div>
                         </div>
-                    </div>
-                </main>
-                : <Loading />
-            }
+                    </main>
+                    : <Loading />
+                }
+            </Layout>
         </>
 
     )
