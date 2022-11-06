@@ -12,17 +12,17 @@
 ## 📸 Screenshots
 
 <ul style="display:flex flex-direction:column">
-<img src="./screenshots/user-light.PNG" width="690" height="375" alt="reddit-user-overview"> 
-<img src="./screenshots/charts-light.PNG" width="690" height="375" alt="reddit-user-chart">
-<img src="./screenshots/subreddit-light.PNG" width="690" height="375" alt="subreddit">    
+<img src="./screenshots/user-light.PNG" style="max-width:100%; max-height:375px;" alt="reddit-user-overview"> 
+<img src="./screenshots/charts-light.PNG" style="max-width:100%; max-height:375px;" alt="reddit-user-chart">
+<img src="./screenshots/subreddit-light.PNG" style="max-width:100%; max-height:375px;" alt="subreddit">    
 </ul>
 
 ### Dark Mode
 
 <ul style="display:flex flex-direction:column">
-<img src="./screenshots/user-dark.PNG" width="690" height="375" alt="reddit-user-overview-dark">  
-<img src="./screenshots/charts-dark.PNG" width="690" height="375" alt="reddit-user-chart-dark">
-<img src="./screenshots/subreddit-dark.PNG" width="690" height="375" alt="subreddit-dark">
+<img src="./screenshots/user-dark.PNG" style="max-width:100%; max-height:375px;" alt="reddit-user-overview-dark">  
+<img src="./screenshots/charts-dark.PNG" style="max-width:100%; max-height:375px;" alt="reddit-user-chart-dark">
+<img src="./screenshots/subreddit-dark.PNG" style="max-width:100%; max-height:375px;" alt="subreddit-dark">
 </ul>
 
 ### Mobile Design
